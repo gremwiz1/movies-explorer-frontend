@@ -1,0 +1,18 @@
+.header {
+  min-height: 74px;
+  display: flex;
+}
+.header__logo {
+  height: 38px;
+  width: 38px;
+  margin-top: 18px;
+  margin-left: 70px;
+  background-image: url("../../images/logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: 1s;
+}
+.header__logo:hover {
+  opacity: 0.7;
+}
