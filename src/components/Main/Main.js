@@ -9,9 +9,10 @@ import Portfolio from "../Portfolio/Portfolio";
 import Footer from "../Footer/Footer";
 
 function Main() {
+    const [isLogged, setIsLogged] = React.useState(false);
     return (
         <>
-            <Promo />
+            <Promo isLogged={isLogged} />
             <NavTab />
             <AboutProject />
             <Techs />

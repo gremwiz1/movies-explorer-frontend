@@ -4,14 +4,16 @@
 }
 .header__logo {
   height: 38px;
-  width: 38px;
+  width: 43px;
   margin-top: 18px;
   margin-left: 70px;
   background-image: url("../../images/logo.png");
-  background-size: contain;
+  background-size: cover;
+  background-position: center center;
   background-repeat: no-repeat;
   cursor: pointer;
   transition: 1s;
+  text-decoration: none;
 }
 .header__logo:hover {
   opacity: 0.7;
