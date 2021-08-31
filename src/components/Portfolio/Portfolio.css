@@ -1,0 +1,54 @@
+.portfolio {
+  margin-bottom: 125px;
+  background: #ffffff;
+  padding-left: 70px;
+  padding-right: 70px;
+}
+.portfolio__subtitle {
+  margin: 0;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #a0a0a0;
+  margin-bottom: 50px;
+}
+.portfolio__job {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 19px;
+  border-bottom: 1px solid #e8e8e8;
+  margin-bottom: 20px;
+  width: 100%;
+}
+.portfolio__job:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.potfolio__job_text {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 50px;
+  letter-spacing: -0.04em;
+  text-align: left;
+  color: #000000;
+  margin: 0;
+}
+.portfolio__job_link {
+  width: 29px;
+  height: 60px;
+  background-image: url("../../images/portfolio-job-link.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  transition: 1s;
+}
+.portfolio__job_link:hover {
+  opacity: 0.7;
+}
