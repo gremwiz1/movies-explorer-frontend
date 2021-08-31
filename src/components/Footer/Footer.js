@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./Footer.css";
 
 function Footer() {
@@ -9,9 +8,9 @@ function Footer() {
             <div className="footer__bottom">
                 <p className="footer__year">&#169; 2021</p>
                 <div className="footer__links">
-                    <Link className="footer__link" to="https://practicum.yandex.ru/">Яндекс.Практикум</Link>
-                    <Link className="footer__link" to="https://github.com/gremwiz1">Github</Link>
-                    <Link className="footer__link" to="https://www.facebook.com/profile.php?id=100005430076556">Facebook</Link>
+                    <a className="footer__link" href="https://practicum.yandex.ru/" target="_blank" rel="noreferrer">Яндекс.Практикум</a>
+                    <a className="footer__link" href="https://github.com/gremwiz1" target="_blank" rel="noreferrer">Github</a>
+                    <a className="footer__link" href="https://www.facebook.com/profile.php?id=100005430076556" target="_blank" rel="noreferrer">Facebook</a>
                 </div>
             </div>
         </footer>

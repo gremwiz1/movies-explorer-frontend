@@ -6,6 +6,7 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Portfolio/Portfolio";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
+import NotFound from "../NotFound/NotFound";
 
 function App() {
     return (
@@ -28,6 +29,9 @@ function App() {
                 </Route>
                 <Route exact path="/signup">
                     <Register />
+                </Route>
+                <Route path="*" >
+                    <NotFound />
                 </Route>
             </Switch>
         </>
