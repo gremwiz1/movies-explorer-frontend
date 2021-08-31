@@ -17,7 +17,7 @@ function App() {
                     <Main isLogged={isLogged} />
                 </Route>
                 <Route exact path="/movies">
-                    <Movies />
+                    <Movies isLogged={isLogged} />
                 </Route>
                 <Route exact path="/saved-movies">
                     <SavedMovies />
