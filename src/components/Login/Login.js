@@ -11,10 +11,10 @@ function Login() {
                 <fieldset className="login__fieldset">
                     <p className="login__text">E-mail</p>
                     <input className="login__input" type="email" required />
-                    <span></span>
+                    <span className="login__error"></span>
                     <p className="login__text">Пароль</p>
                     <input className="login__input" type="password" required minLength="8" />
-                    <span></span>
+                    <span className="login__error"></span>
                 </fieldset>
                 <div className="login__bottom">
                     <button className="login__button" type="submit">Войти</button>
