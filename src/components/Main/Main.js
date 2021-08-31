@@ -8,8 +8,8 @@ import AboutMe from "../AboutMe/AboutMe";
 import Portfolio from "../Portfolio/Portfolio";
 import Footer from "../Footer/Footer";
 
-function Main() {
-    const [isLogged, setIsLogged] = React.useState(false);
+function Main({ isLogged }) {
+
     return (
         <>
             <Promo isLogged={isLogged} />
