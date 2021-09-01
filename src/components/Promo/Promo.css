@@ -21,3 +21,18 @@
   max-width: 730px;
   color: #ffffff;
 }
+@media screen and (max-width: 768px) {
+  .promo-page__title {
+    margin-top: 326px;
+    padding-bottom: 342px;
+    margin-bottom: 0;
+  }
+}
+@media screen and (max-width: 480px) {
+  .promo-page__title {
+    font-size: 31px;
+    line-height: 39px;
+    margin-top: 207px;
+    padding-bottom: 246px;
+  }
+}

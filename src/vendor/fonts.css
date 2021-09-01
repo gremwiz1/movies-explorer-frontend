@@ -1,11 +1,4 @@
 @font-face {
-  src: url(./fonts/Inter-Black.woff2) format("woff2"),
-    url(./fonts/Inter-Black.woff) format("woff");
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 900;
-}
-@font-face {
   src: url(./fonts/Inter-Medium.woff2) format("woff2"),
     url(./fonts/Inter-Medium.woff) format("woff");
   font-family: "Inter";
@@ -16,6 +9,13 @@
   src: url(./fonts/Inter-Regular.woff2) format("woff2"),
     url(./fonts/Inter-Regular.woff) format("woff");
   font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  src: url(./fonts/SuisseIntl-Regular.woff2) format("woff2"),
+    url(./fonts/SuisseIntl-Regular.woff) format("woff");
+  font-family: "Suisse Intl";
   font-style: normal;
   font-weight: 400;
 }
