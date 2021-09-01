@@ -103,7 +103,6 @@ function Movies({ isLogged }) {
             <SearchForm />
             <FilterCheckbox isFilterMovies={isFilterMovies} changeFilter={changeFilter} />
             <MoviesCardList moviesCollection={moviesCollection} isSaved={false} />
-
             <button type="button" className="movies__button">Ещё</button>
             <Footer />
         </section>
