@@ -1,0 +1,12 @@
+.saved-movies {
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.saved-movies__content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  min-height: calc(100% - 172px);
+}

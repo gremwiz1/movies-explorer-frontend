@@ -20,7 +20,7 @@ function App() {
                     <Movies isLogged={isLogged} />
                 </Route>
                 <Route exact path="/saved-movies">
-                    <SavedMovies />
+                    <SavedMovies isLogged={isLogged} />
                 </Route>
                 <Route exact path="/profile">
                     <Profile isLogged={isLogged} />
