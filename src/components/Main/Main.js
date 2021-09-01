@@ -12,7 +12,7 @@ function Main({ isLogged }) {
 
     return (
         <>
-            <Promo isLogged={isLogged} />
+            <Promo isLogged={isLogged} isMain={true} isMovies={false} isSavedMovies={false} isProfile={false} />
             <NavTab />
             <AboutProject />
             <Techs />

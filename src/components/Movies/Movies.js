@@ -99,7 +99,7 @@ function Movies({ isLogged }) {
     ]
     return (
         <section className="movies">
-            <Header isLogged={isLogged} />
+            <Header isLogged={isLogged} isMain={false} isMovies={true} isSavedMovies={false} isProfile={false} />
             <SearchForm />
             <FilterCheckbox isFilterMovies={isFilterMovies} changeFilter={changeFilter} />
             <MoviesCardList moviesCollection={moviesCollection} isSaved={false} />

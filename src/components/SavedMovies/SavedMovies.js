@@ -48,7 +48,7 @@ function SavedMovies({ isLogged }) {
     return (
         <section className="saved-movies">
             <div className="saved-movies__content">
-                <Header isLogged={isLogged} />
+                <Header isLogged={isLogged} isMain={false} isProfile={false} isMovies={false} isSavedMovies={true} />
                 <SearchForm />
                 <FilterCheckbox isFilterMovies={isFilterMovies} changeFilter={changeFilter} />
                 <MoviesCardList moviesCollection={moviesCollection} isSaved={true} />

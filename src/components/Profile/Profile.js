@@ -5,7 +5,7 @@ import "./Profile.css";
 function Profile({ isLogged }) {
     return (
         <section className="profile">
-            <Header isLogged={isLogged} />
+            <Header isLogged={isLogged} isMain={false} isProfile={true} isMovies={false} isSavedMovies={false} />
             <h1 className="profile__title">Привет, Виталий!</h1>
             <form className="profile__form">
                 <div className="profile__fields">
