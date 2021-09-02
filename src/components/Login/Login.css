@@ -151,3 +151,56 @@
   flex-direction: column;
   align-content: flex-end;
 }
+@media screen and (max-width: 768px) {
+  .login__logo {
+    margin-top: 232px;
+  }
+  .login__form {
+    height: calc(100vh - 379px);
+  }
+  .login__links {
+    padding-bottom: 232px;
+  }
+}
+@media screen and (max-width: 420px) {
+  .login {
+    width: 260px;
+  }
+  .login__logo {
+    margin-top: 56px;
+    width: 38px;
+    background-position: center;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .login__title {
+    width: 260px;
+    margin-bottom: 80px;
+  }
+  .login__form {
+    width: 260px;
+    height: calc(100vh - 253px);
+  }
+  .login__input {
+    width: 260px;
+  }
+  .login__links {
+    padding-bottom: 30px;
+  }
+  .login__answer {
+    font-size: 12px;
+    line-height: 14.52px;
+    margin-right: 7px;
+  }
+  .login__link {
+    font-size: 12px;
+    line-height: 14.52px;
+  }
+  .login__button {
+    width: 260px;
+    font-size: 12px;
+    line-height: 14.52px;
+    margin-bottom: 14px;
+  }
+}

@@ -9,7 +9,11 @@ import Register from "../Register/Register";
 import NotFound from "../NotFound/NotFound";
 
 function App() {
-    const [isLogged, setIsLogged] = React.useState(false);
+    const [isLogged, setIsLogged] = React.useState(true);
+    const [isFilterMovies, setIsFilterMovies] = React.useState(true);
+    function changeFilter() {
+        setIsFilterMovies(!isFilterMovies);
+    }
     return (
         <>
             <Switch>
@@ -17,10 +21,10 @@ function App() {
                     <Main isLogged={isLogged} />
                 </Route>
                 <Route exact path="/movies">
-                    <Movies isLogged={isLogged} />
+                    <Movies isLogged={isLogged} isFilterMovies={isFilterMovies} setFilter={changeFilter} />
                 </Route>
                 <Route exact path="/saved-movies">
-                    <SavedMovies isLogged={isLogged} />
+                    <SavedMovies isLogged={isLogged} isFilterMovies={isFilterMovies} setFilter={changeFilter} />
                 </Route>
                 <Route exact path="/profile">
                     <Profile isLogged={isLogged} />

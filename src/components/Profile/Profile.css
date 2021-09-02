@@ -109,3 +109,43 @@
 .profile__button-logout:hover {
   opacity: 0.7;
 }
+@media screen and (max-width: 768px) {
+  .profile__title {
+    margin-top: 236px;
+    margin-bottom: 96px;
+  }
+  .profile__form {
+    height: calc(100vh - 435px);
+  }
+  .profile__buttons {
+    margin-bottom: 269px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .profile__title {
+    margin-top: 70px;
+    margin-bottom: 80px;
+  }
+  .profile__form {
+    width: 260px;
+    height: calc(100vh - 253px);
+  }
+  .profile__field {
+    width: 260px;
+  }
+  .profile__buttons {
+    margin-bottom: 40px;
+  }
+  .profile__button-submit {
+    width: 300px;
+    height: 15px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .profile__button-logout {
+    width: 300px;
+    height: 15px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

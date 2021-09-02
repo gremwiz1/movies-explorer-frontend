@@ -6,10 +6,10 @@ import Footer from "../Footer/Footer";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import "./SavedMovies.css";
 
-function SavedMovies({ isLogged }) {
-    const [isFilterMovies, setIsFilterMovies] = React.useState(true);
+function SavedMovies({ isLogged, setFilter, isFilterMovies }) {
+
     function changeFilter() {
-        setIsFilterMovies(!isFilterMovies);
+        setFilter();
     }
     const moviesCollection = [
         {

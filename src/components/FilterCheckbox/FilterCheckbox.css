@@ -34,3 +34,19 @@
   color: #000000;
   margin: 0;
 }
+@media screen and (max-width: 768px) {
+  .filter-checkbox {
+    margin-bottom: 61px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .filter-checkbox {
+    margin-bottom: 50px;
+  }
+  .filter-checkbox__button {
+    margin-right: 13px;
+  }
+  .filter-checkbox__text {
+    font-size: 11px;
+  }
+}

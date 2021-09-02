@@ -20,7 +20,7 @@ function Navigation({ isLogged, isMain, isMovies, isSavedMovies, isProfile }) {
                             <Link to="/movies" className="navigation__movie">Фильмы</Link>
                             <Link to="/saved-movies" className="navigation__movie">Сохранённые фильмы</Link>
                         </div>
-                        <Link to="/profile" className="navigation__account">Аккаунт</Link>
+                        <Link to="/profile" className={isMain ? "navigation__account navigation__account_main" : "navigation__account"}>Аккаунт</Link>
                     </div>
                     <button className="navigation__burger-menu" onClick={showBurgerMenu}></button>
                 </>

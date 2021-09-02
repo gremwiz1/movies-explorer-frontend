@@ -83,6 +83,9 @@
   border-radius: 20px;
   transition: 1s;
 }
+.navigation__account_main {
+  background: #5c5c5c;
+}
 .navigation__account:hover {
   opacity: 0.7;
 }

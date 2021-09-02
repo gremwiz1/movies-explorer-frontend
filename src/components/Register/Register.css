@@ -108,7 +108,7 @@
   margin-right: 6px;
 }
 .register__link {
-  font-family: Inter;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -150,4 +150,57 @@
   display: flex;
   flex-direction: column;
   align-content: flex-end;
+}
+@media screen and (max-width: 768px) {
+  .register__logo {
+    margin-top: 232px;
+  }
+  .register__form {
+    height: calc(100vh - 379px);
+  }
+  .register__links {
+    padding-bottom: 232px;
+  }
+}
+@media screen and (max-width: 420px) {
+  .register {
+    width: 260px;
+  }
+  .register__logo {
+    margin-top: 56px;
+    width: 38px;
+    background-position: center;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .register__title {
+    width: 260px;
+    margin-bottom: 80px;
+  }
+  .register__form {
+    width: 260px;
+    height: calc(100vh - 253px);
+  }
+  .register__input {
+    width: 260px;
+  }
+  .register__links {
+    padding-bottom: 30px;
+  }
+  .register__answer {
+    font-size: 12px;
+    line-height: 14.52px;
+    margin-right: 7px;
+  }
+  .register__link {
+    font-size: 12px;
+    line-height: 14.52px;
+  }
+  .register__button {
+    width: 260px;
+    font-size: 12px;
+    line-height: 14.52px;
+    margin-bottom: 14px;
+  }
 }
