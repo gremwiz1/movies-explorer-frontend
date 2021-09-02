@@ -26,7 +26,7 @@ function Navigation({ isLogged, isMain, isMovies, isSavedMovies, isProfile }) {
                 </>
                 :
                 <div className="navigation__links">
-                    <Link to="/signup" className="navigation__link">Регистрация</Link>
+                    <Link to="/signup" className={isMain ? "navigation__link" : "navigation__link navigation__link_black"}>Регистрация</Link>
                     <Link to="/signin" className="navigation__link">Войти</Link>
                 </div>
             }

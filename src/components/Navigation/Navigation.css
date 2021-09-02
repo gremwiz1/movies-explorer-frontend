@@ -35,6 +35,9 @@
 .navigation__link:hover {
   opacity: 0.7;
 }
+.navigation__link_black {
+  color: #000000;
+}
 .navigation_logged {
   width: calc((100% + 42px) / 2 + 106px);
   justify-content: space-between;

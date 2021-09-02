@@ -73,10 +73,10 @@
 .techs__list_element:last-child {
   margin-right: 0;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 830px) {
   .techs {
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 6.51vw;
+    padding-right: 6.51vw;
   }
   .techs__subtitle {
     padding-top: 90px;
@@ -94,16 +94,19 @@
     margin-bottom: 90px;
   }
   .techs__list_element {
-    width: 84px;
+    width: 10.937vw;
     height: 57px;
     font-size: 12px;
     line-height: 14.52px;
   }
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 580px) {
   .techs {
     padding-left: 18px;
     padding-right: 18px;
+  }
+  .techs__list_element {
+    width: 84px;
   }
   .techs__subtitle {
     padding-top: 70px;

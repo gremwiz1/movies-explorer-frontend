@@ -13,6 +13,7 @@
   background-repeat: no-repeat;
   background-position: center center;
   margin-right: 12px;
+  background: #ffffff;
 }
 .filter-checkbox__button:hover {
   opacity: 0.7;

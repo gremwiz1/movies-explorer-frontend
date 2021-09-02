@@ -4,11 +4,11 @@
 }
 .header__logo {
   height: 38px;
-  width: 43px;
+  width: 38px;
   margin-top: 18px;
   margin-left: 70px;
   background-image: url("../../images/logo.png");
-  background-size: cover;
+  background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
   cursor: pointer;
