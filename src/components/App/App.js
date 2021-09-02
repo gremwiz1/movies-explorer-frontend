@@ -9,7 +9,7 @@ import Register from "../Register/Register";
 import NotFound from "../NotFound/NotFound";
 
 function App() {
-    const [isLogged, setIsLogged] = React.useState(true);
+    const [isLogged, setIsLogged] = React.useState(false);
     const [isFilterMovies, setIsFilterMovies] = React.useState(true);
     function changeFilter() {
         setIsFilterMovies(!isFilterMovies);
