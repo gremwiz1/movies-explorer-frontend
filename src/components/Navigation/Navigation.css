@@ -183,6 +183,8 @@
   transition: 1s;
   margin: 0;
   margin-bottom: 90px;
+  background: #f9f9f9;
+  border-radius: 20px;
 }
 .burger-menu__profile:hover {
   opacity: 0.7;
