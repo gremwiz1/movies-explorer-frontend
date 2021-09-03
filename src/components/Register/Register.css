@@ -1,0 +1,206 @@
+.register {
+  display: flex;
+  justify-content: center;
+  background: #ffffff;
+  flex-direction: column;
+  height: 100%;
+  width: 396px;
+  margin: 0 auto;
+}
+.register__logo {
+  background-image: url("../../images/logo.png");
+  width: 396px;
+  height: 38px;
+  background-position: left;
+  background-repeat: no-repeat;
+  margin: 0;
+  margin-top: 70px;
+  margin-bottom: 40px;
+  text-decoration: none;
+  transition: 1s;
+}
+.register__logo:hover {
+  opacity: 0.7;
+}
+.register__title {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 29px;
+  letter-spacing: 0em;
+  text-align: left;
+  width: 396px;
+  color: #000000;
+  margin: 0;
+  margin-bottom: 40px;
+}
+.register__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 396px;
+  height: calc(100vh - 217px);
+}
+.register__text {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 12px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #a0a0a0;
+  margin: 0;
+  margin-bottom: 5px;
+}
+.register__input {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+  padding-bottom: 10px;
+  margin: 0;
+  color: #000000;
+  border: none;
+  border-bottom: 1px solid #e8e8e8;
+  margin-bottom: 24px;
+  width: 396px;
+}
+.register__input:focus {
+  border-bottom: 1px solid #2be080;
+}
+.register__input_invalid {
+  color: #ee3465;
+  margin-bottom: 6px;
+}
+.register__error {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 12px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #ee3465;
+  margin: 0;
+  margin-bottom: 6px;
+  min-height: 12px;
+}
+.register__links {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 70px;
+}
+.register__answer {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #a0a0a0;
+  margin: 0;
+  margin-right: 6px;
+}
+.register__link {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #2be080;
+  margin: 0;
+  transition: 1s;
+}
+.register__link:hover {
+  opacity: 0.7;
+}
+.register__button {
+  width: 396px;
+  height: 45px;
+  border-radius: 3px;
+  background: #2be080;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: 1s;
+}
+.register__button:hover {
+  opacity: 0.7;
+}
+.register__fieldset {
+  padding: 0;
+  border: none;
+}
+.register__bottom {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-end;
+}
+@media screen and (max-width: 768px) {
+  .register__logo {
+    margin-top: 232px;
+  }
+  .register__form {
+    height: calc(100vh - 379px);
+  }
+  .register__links {
+    padding-bottom: 232px;
+  }
+}
+@media screen and (max-width: 420px) {
+  .register {
+    width: 260px;
+  }
+  .register__logo {
+    margin-top: 56px;
+    width: 38px;
+    background-position: center;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .register__title {
+    width: 260px;
+    margin-bottom: 80px;
+  }
+  .register__form {
+    width: 260px;
+    height: calc(100vh - 253px);
+  }
+  .register__input {
+    width: 260px;
+  }
+  .register__links {
+    padding-bottom: 30px;
+  }
+  .register__answer {
+    font-size: 12px;
+    line-height: 14.52px;
+    margin-right: 7px;
+  }
+  .register__link {
+    font-size: 12px;
+    line-height: 14.52px;
+  }
+  .register__button {
+    width: 260px;
+    font-size: 12px;
+    line-height: 14.52px;
+    margin-bottom: 14px;
+  }
+}

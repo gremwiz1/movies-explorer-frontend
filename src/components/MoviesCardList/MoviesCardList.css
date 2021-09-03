@@ -1,0 +1,34 @@
+.movies__collection {
+  display: grid;
+  margin-left: 70px;
+  margin-right: 70px;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  row-gap: 38px;
+  column-gap: 20px;
+  margin-bottom: 10px;
+  padding: 0;
+}
+.movies-card-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media screen and (max-width: 840px) {
+  .movies__collection {
+    margin-left: 3.906vw;
+    margin-right: 3.906vw;
+    row-gap: 3.906vw;
+    column-gap: 3.906vw;
+    grid-template-columns: repeat(auto-fit, minmax(44.14vw, 1fr));
+  }
+}
+@media screen and (max-width: 500px) {
+  .movies__collection {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
