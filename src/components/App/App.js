@@ -17,6 +17,8 @@ function App() {
     const [isFilterMovies, setIsFilterMovies] = React.useState(false);
     const [moviesCollection, setMoviesCollection] = React.useState([]);
     const [savedMoviesCollection, setSavedMoviesCollection] = React.useState([]);
+    const [loginError, setLoginError] = React.useState("");
+    const [registerError, setRegisterError] = React.useState("");
     const [currentUser, setCurrentUser] = React.useState({});
     const [token, setToken] = React.useState("");
     const history = useHistory();
@@ -54,9 +56,8 @@ function App() {
                     history.push('/signin');
                 }
             }).catch((err) => {
-                //setInfoTooltipMessage('Что-то пошло не так! Попробуйте ещё раз.');
-                if (err === 400) return console.log('некорректно заполнено одно из полей ');
-                console.log(err);
+                setRegisterError('Что-то пошло не так! Попробуйте ещё раз.');
+                if (err === 400) return setRegisterError('некорректно заполнено одно из полей ');
             })
     }
     function onLogin({ email, password }) {
@@ -70,9 +71,9 @@ function App() {
                 }
             }).catch((err) => {
 
-                //if (err === 400) return setInfoTooltipMessage('не передано одно из полей');
-                //if (err === 401) return setInfoTooltipMessage('пользователь с email не найден');
-                //setInfoTooltipMessage('Попробуйте еще раз!');
+                if (err === 400) return setLoginError('не передано одно из полей');
+                if (err === 401) return setLoginError('пользователь с email не найден');
+                setLoginError('Попробуйте еще раз!');
                 console.log(err);
             })
     }
@@ -82,6 +83,10 @@ function App() {
         setMoviesCollection([]);
         setSavedMoviesCollection([]);
         history.push('/signin');
+    }
+    function clearAllErrors() {
+        setLoginError("");
+        setRegisterError("");
     }
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -99,10 +104,10 @@ function App() {
                     <Profile isLogged={isLogged} onSignOut={onSignOut} />
                 </ProtectedRoute>
                 <Route exact path="/signin">
-                    {isLogged ? <Redirect to="/" /> : <Login onLogin={onLogin} />}
+                    {isLogged ? <Redirect to="/" /> : <Login onLogin={onLogin} clearErrors={clearAllErrors} loginError={loginError} />}
                 </Route>
                 <Route exact path="/signup">
-                    {isLogged ? <Redirect to="/" /> : <Register onRegister={onRegister} />}
+                    {isLogged ? <Redirect to="/" /> : <Register onRegister={onRegister} clearErrors={clearAllErrors} registerError={registerError} />}
                 </Route>
                 <Route path="*" >
                     <NotFound />

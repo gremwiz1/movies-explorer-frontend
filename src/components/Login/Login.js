@@ -3,12 +3,16 @@ import { Link } from "react-router-dom";
 import "./Login.css";
 import { useFormWithValidation } from "../../hooks/useFormWIthValidation";
 
-function Login({ onLogin }) {
+function Login({ onLogin, clearErrors, loginError }) {
     const { values, handleChange, errors, isFormValid, resetForm } = useFormWithValidation();
     function handleLogin(e) {
         e.preventDefault();
         onLogin({ email: values.email, password: values.password });
         resetForm();
+    }
+    function handleClearErrors() {
+        resetForm();
+        clearErrors();
     }
     return (
         <section className="login">
@@ -24,10 +28,11 @@ function Login({ onLogin }) {
                     <span className="login__error">{errors.password}</span>
                 </fieldset>
                 <div className="login__bottom">
-                    <button className={isFormValid ? "login__button" : "login__button login__button_invalid"} type="submit">Войти</button>
+                    <span className="login__error">{loginError}</span>
+                    <button className={isFormValid ? "login__button" : "login__button login__button_invalid"} type="submit" disabled={!isFormValid}>Войти</button>
                     <div className="login__links">
                         <p className="login__answer">Ещё не зарегистрированы?</p>
-                        <Link className="login__link" to="/signup">Регистрация</Link>
+                        <Link className="login__link" to="/signup" onClick={handleClearErrors}>Регистрация</Link>
                     </div>
                 </div>
             </form>

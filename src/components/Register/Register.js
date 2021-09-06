@@ -3,12 +3,16 @@ import { Link } from "react-router-dom";
 import "./Register.css";
 import { useFormWithValidation } from "../../hooks/useFormWIthValidation";
 
-function Register({ onRegister }) {
+function Register({ onRegister, clearErrors, registerError }) {
     const { values, handleChange, errors, isFormValid, resetForm } = useFormWithValidation();
     function handleRegister(e) {
         e.preventDefault();
         onRegister({ email: values.email, name: values.name, password: values.password });
         resetForm();
+    }
+    function handleClearErrors() {
+        resetForm();
+        clearErrors();
     }
     return (
         <section className="register">
@@ -27,10 +31,11 @@ function Register({ onRegister }) {
                     <span className="register__error">{errors.password}</span>
                 </fieldset>
                 <div className="register__bottom">
-                    <button className={isFormValid ? "register__button" : "register__button register__button_invalid"} type="submit">Зарегистрироваться</button>
+                    <span className="register__error">{registerError}</span>
+                    <button className={isFormValid ? "register__button" : "register__button register__button_invalid"} type="submit" disabled={!isFormValid}>Зарегистрироваться</button>
                     <div className="register__links">
                         <p className="register__answer">Уже зарегистрированы?</p>
-                        <Link className="register__link" to="/signin">Войти</Link>
+                        <Link className="register__link" to="/signin" onClick={handleClearErrors}>Войти</Link>
                     </div>
                 </div>
             </form>
