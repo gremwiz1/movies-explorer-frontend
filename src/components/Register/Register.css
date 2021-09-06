@@ -151,6 +151,9 @@
   flex-direction: column;
   align-content: flex-end;
 }
+.register__button_invalid {
+  color: #ee3465;
+}
 @media screen and (max-width: 768px) {
   .register__logo {
     margin-top: 232px;
