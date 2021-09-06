@@ -60,8 +60,8 @@ function App() {
     function onRegister({ email, password, name }) {
         MoviesApi.register({ email, password, name })
             .then((data) => {
-                if (data) {
-                    history.push('/signin');
+                if (data.user) {
+                    onLogin({ email, password })
                 }
             }).catch((err) => {
                 setRegisterError('Что-то пошло не так! Попробуйте ещё раз.');
@@ -75,7 +75,7 @@ function App() {
                     setToken(data.token);
                     localStorage.setItem('jwt', data.token);
                     setIsLogged(true);
-                    history.push('/');
+                    history.push('/movies');
                 }
             }).catch((err) => {
 
