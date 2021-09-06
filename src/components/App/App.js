@@ -13,13 +13,18 @@ import * as MainApi from "../../utils/MainApi";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function App() {
-    const [isLogged, setIsLogged] = React.useState(false);
+    const [isLogged, setIsLogged] = React.useState(true);
     const [isFilterMovies, setIsFilterMovies] = React.useState(false);
     const [moviesCollection, setMoviesCollection] = React.useState([]);
     const [savedMoviesCollection, setSavedMoviesCollection] = React.useState([]);
+    const [filterMoviesCollection, setFilterMoviesCollection] = React.useState([]);
+    const [filterSavedMoviesCollection, setFilterSavedMoviesCollection] = React.useState([]);
+    const [filterTimeMoviesCollection, setFilterTimeMoviesCollection] = React.useState([]);
+    const [filterTimeSavedMoviesCollection, setFilterTimeSavedMoviesCollection] = React.useState([]);
     const [loginError, setLoginError] = React.useState("");
     const [registerError, setRegisterError] = React.useState("");
     const [currentUser, setCurrentUser] = React.useState({});
+    const [isLoadingMovies, setIsLoadingMovies] = React.useState(false);
     const [token, setToken] = React.useState("");
     const history = useHistory();
     function changeFilter() {
@@ -48,6 +53,9 @@ function App() {
     }
     React.useEffect(() => {
         tokenCheck();
+        MainApi.getInitialMovies()
+            .then((res) => setMoviesCollection(res))
+            .catch((err) => console.log(err));
     }, []);
     function onRegister({ email, password, name }) {
         MoviesApi.register({ email, password, name })
@@ -82,11 +90,52 @@ function App() {
         setIsLogged(false);
         setMoviesCollection([]);
         setSavedMoviesCollection([]);
+        setFilterTimeSavedMoviesCollection([]);
+        setFilterSavedMoviesCollection([]);
+        setFilterTimeMoviesCollection([]);
+        setFilterMoviesCollection([]);
+        clearAllErrors();
         history.push('/signin');
     }
     function clearAllErrors() {
         setLoginError("");
         setRegisterError("");
+    }
+    function searchMovies(searchText) {
+        setFilterMoviesCollection(search(moviesCollection, searchText));
+    }
+    function searchSavedMovies(searchText) {
+        setFilterSavedMoviesCollection(search(savedMoviesCollection, searchText));
+    }
+    function search(collection, searchText) {
+        let result = [];
+        collection.forEach((movie) => {
+            if (movie.nameRU.indexOf(searchText) > -1) {
+                result.push(movie);
+            }
+        })
+        return result;
+    }
+    function searchFilterTime(collection) {
+        let result = [];
+        collection.forEach((movie) => {
+            if (movie.duration <= 40) {
+                result.push(movie);
+            }
+        })
+        return result;
+    }
+    React.useEffect(() => {
+        if (isFilterMovies) {
+            setFilterTimeMoviesCollection(searchFilterTime(filterMoviesCollection));
+            setFilterTimeSavedMoviesCollection(searchFilterTime(filterSavedMoviesCollection));
+        }
+    }, [isFilterMovies])
+    function movieDeleteFromSavedMovies(id) {
+
+    }
+    function movieSaveInStore(id) {
+
     }
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -95,10 +144,10 @@ function App() {
                     <Main isLogged={isLogged} />
                 </Route>
                 <ProtectedRoute exact path="/movies" isLogged={isLogged}>
-                    <Movies isLogged={isLogged} isFilterMovies={isFilterMovies} setFilter={changeFilter} moviesCollection={moviesCollection} />
+                    <Movies isLogged={isLogged} isFilterMovies={isFilterMovies} setFilter={changeFilter} moviesCollection={isFilterMovies ? filterTimeMoviesCollection : filterMoviesCollection} searchMovies={searchMovies} searchSavedMovies={searchSavedMovies} isLoadingMovies={isLoadingMovies} savedMovies={savedMoviesCollection} movieDeleteFromSavedMovies={movieDeleteFromSavedMovies} movieSaveInStore={movieSaveInStore} />
                 </ProtectedRoute>
                 <ProtectedRoute exact path="/saved-movies" isLogged={isLogged}>
-                    <SavedMovies isLogged={isLogged} isFilterMovies={isFilterMovies} setFilter={changeFilter} moviesCollection={savedMoviesCollection} />
+                    <SavedMovies isLogged={isLogged} isFilterMovies={isFilterMovies} setFilter={changeFilter} moviesCollection={isFilterMovies ? filterTimeSavedMoviesCollection : filterSavedMoviesCollection} searchMovies={searchMovies} searchSavedMovies={searchSavedMovies} isLoadingMovies={isLoadingMovies} savedMovies={savedMoviesCollection} movieDeleteFromSavedMovies={movieDeleteFromSavedMovies} movieSaveInStore={movieSaveInStore} />
                 </ProtectedRoute>
                 <ProtectedRoute exact path="/profile" isLogged={isLogged}>
                     <Profile isLogged={isLogged} onSignOut={onSignOut} />

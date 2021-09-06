@@ -1,29 +1,42 @@
 import React from "react";
 import "./MoviesCard.css";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function MoviesCard({ movies, isSaved }) {
+function MoviesCard({ movies, isSaved, savedMovies, movieDeleteFromSavedMovies, movieSaveInStore }) {
 
-    const [isLike, setIsLike] = React.useState(movies.isLikeCard);
-    function changeLikeCard() {
+    const [isLike, setIsLike] = React.useState(false);
+    const nowMoviesSaved = savedMovies.find((item) => item.nameRU === movies.nameRU);
+    function handleLikeCard(e) {
+        if (isLike) {
+            movieDeleteFromSavedMovies(e.target.closest(".movies-card").id);
+        }
+        else {
+            movieSaveInStore(e.target.closest(".movies-card").id);
+        }
         setIsLike(!isLike);
     }
-    function deleteCard() {
-
+    function deleteCard(e) {
+        movieDeleteFromSavedMovies(e.target.closest(".movies-card").id);
     }
-
+    React.useEffect(() => {
+        if (nowMoviesSaved) {
+            setIsLike(true);
+        }
+    }, [nowMoviesSaved])
+    const currentUser = React.useContext(CurrentUserContext);
     return (
-        <li className="movies-card">
-            <img className="movies-card__image" alt={movies.nameRU} src={movies.image} />
+        <li className="movies-card" id={isSaved ? movies._id : movies.id}>
+            <a href={isSaved ? movies.trailer : movies.trailerLink} className="movies-card__trailer" target="_blank" rel="noreferrer"><img className="movies-card__image" alt={movies.nameRU} src={isSaved ? movies.image : `https://api.nomoreparties.co${movies.image.url}`} /></a>
             <div className="movies-card__content">
                 <p className="movies-card__name">{movies.nameRU}</p>
                 {
                     isSaved ? <button type="button"
                         onClick={deleteCard}
-                        className={(movies.owner == 2323) ? "movies-card__delete-button_visible" : "none"}>
+                        className={(movies.owner === currentUser._id) ? "movies-card__delete-button_visible" : "none"}>
                     </button>
                         :
                         <button type="button"
-                            onClick={changeLikeCard}
+                            onClick={handleLikeCard}
                             className={isLike ? "movies-card__like movies-card__like_active" : "movies-card__like movies-card__like_inactive"}>
                         </button>
                 }
