@@ -5,6 +5,19 @@
   justify-content: center;
   width: 100%;
 }
+.profile__error {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 12px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #ee3465;
+  margin: 0;
+  margin-bottom: 6px;
+  min-height: 12px;
+}
 .profile__title {
   margin: 0;
   margin-top: 74px;
@@ -86,6 +99,9 @@
   transition: 1s;
   cursor: pointer;
   background: #ffffff;
+}
+.profile__button_invalid {
+  color: #ee3465;
 }
 .profile__button-submit:hover {
   opacity: 0.7;

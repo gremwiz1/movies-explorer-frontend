@@ -25,6 +25,7 @@ function App() {
     const [registerError, setRegisterError] = React.useState("");
     const [foundError, setFoundError] = React.useState(false);
     const [serverError, setServerError] = React.useState(false);
+    const [profileError, setProfileError] = React.useState("");
     const [currentUser, setCurrentUser] = React.useState({});
     const [isLoadingMovies, setIsLoadingMovies] = React.useState(false);
     const [token, setToken] = React.useState("");
@@ -106,6 +107,7 @@ function App() {
         setRegisterError("");
         setFoundError(false);
         setServerError(false);
+        setProfileError("");
     }
     function searchMovies(searchText) {
         setServerError(false);
@@ -226,6 +228,21 @@ function App() {
     function filterMoviesById(collection, id) {
         return collection.filter((item) => { return item._id !== id });
     }
+    function changeProfile({ name, email }) {
+        MoviesApi.editUserProfile({ token, name, email })
+            .then((newUser) => {
+                if (newUser._id) {
+                    setCurrentUser(newUser);
+                    setProfileError("Данные профиля успешно изменены");
+                }
+                else if (newUser.message) {
+                    setProfileError(newUser.message);
+                }
+            }).catch((err) => setProfileError("Произошла ошибка при обновлении профиля"));
+    }
+    React.useEffect(() => {
+        setProfileError("");
+    }, [pathname]);
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <Switch>
@@ -239,7 +256,7 @@ function App() {
                     <SavedMovies isLogged={isLogged} isFilterMovies={isFilterMovies} setFilter={changeFilter} moviesCollection={isFilterMovies ? filterTimeSavedMoviesCollection : filterSavedMoviesCollection} searchMovies={searchMovies} searchSavedMovies={searchSavedMovies} isLoadingMovies={isLoadingMovies} savedMovies={savedMoviesCollection} movieDeleteFromSavedMovies={movieDeleteFromSavedMovies} movieSaveInStore={movieSaveInStore} foundError={foundError} serverError={serverError} clearAllErrors={clearAllErrors} />
                 </ProtectedRoute>
                 <ProtectedRoute exact path="/profile" isLogged={isLogged}>
-                    <Profile isLogged={isLogged} onSignOut={onSignOut} />
+                    <Profile isLogged={isLogged} onSignOut={onSignOut} changeProfile={changeProfile} profileError={profileError} />
                 </ProtectedRoute>
                 <Route exact path="/signin">
                     {isLogged ? <Redirect to="/" /> : <Login onLogin={onLogin} clearErrors={clearAllErrors} loginError={loginError} />}

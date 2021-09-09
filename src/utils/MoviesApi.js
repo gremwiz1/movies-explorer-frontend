@@ -77,3 +77,16 @@ export const saveMovie = ({ token, movie }) => {
         })
     }).then((res) => handleResponse(res));
 }
+export const editUserProfile = ({ token, name, email }) => {
+    return fetch(`${BASE_URL}/users/me`, {
+        method: 'PATCH',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            name: name,
+            email: email
+        })
+    }).then((res) => handleResponse(res));
+}
