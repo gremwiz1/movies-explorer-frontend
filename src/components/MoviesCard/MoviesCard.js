@@ -5,13 +5,13 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 function MoviesCard({ movies, isSaved, savedMovies, movieDeleteFromSavedMovies, movieSaveInStore }) {
 
     const [isLike, setIsLike] = React.useState(false);
-    const nowMoviesSaved = savedMovies.find((item) => item.nameRU === movies.nameRU);
+    const nowMovieSaved = savedMovies.find((item) => item.nameRU === movies.nameRU);
     function handleLikeCard(e) {
         if (isLike) {
             movieDeleteFromSavedMovies(e.target.closest(".movies-card").id);
         }
         else {
-            movieSaveInStore(e.target.closest(".movies-card").id);
+            movieSaveInStore(movies);
         }
         setIsLike(!isLike);
     }
@@ -19,11 +19,12 @@ function MoviesCard({ movies, isSaved, savedMovies, movieDeleteFromSavedMovies, 
         movieDeleteFromSavedMovies(e.target.closest(".movies-card").id);
     }
     React.useEffect(() => {
-        if (nowMoviesSaved) {
+        if (nowMovieSaved) {
             setIsLike(true);
         }
-    }, [nowMoviesSaved])
+    }, [nowMovieSaved])
     const currentUser = React.useContext(CurrentUserContext);
+    const durationMovie = `${Math.trunc(movies.duration / 60)}ч ${movies.duration % 60}м`;
     return (
         <li className="movies-card" id={isSaved ? movies._id : movies.id}>
             <a href={isSaved ? movies.trailer : movies.trailerLink} className="movies-card__trailer" target="_blank" rel="noreferrer"><img className="movies-card__image" alt={movies.nameRU} src={isSaved ? movies.image : `https://api.nomoreparties.co${movies.image.url}`} /></a>
@@ -41,7 +42,7 @@ function MoviesCard({ movies, isSaved, savedMovies, movieDeleteFromSavedMovies, 
                         </button>
                 }
             </div>
-            <p className="movies-card__time">{movies.duration}</p>
+            <p className="movies-card__time">{durationMovie}</p>
         </li>
     )
 };

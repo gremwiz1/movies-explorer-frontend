@@ -46,3 +46,34 @@ export const getSavedMovies = (token) => {
         }
     }).then((res) => handleResponse(res));
 }
+export const deleteSavedMovie = ({ token, movieId }) => {
+    return fetch(`${BASE_URL}/movies/${movieId}`, {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    }).then((res) => handleResponse(res));
+}
+export const saveMovie = ({ token, movie }) => {
+    return fetch(`${BASE_URL}/movies`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            country: movie.country,
+            director: movie.director,
+            duration: movie.duration,
+            year: movie.year,
+            description: movie.description,
+            image: movie.image,
+            trailer: movie.trailer,
+            thumbnail: movie.thumbnail,
+            movieId: movie.id,
+            nameRU: movie.nameRU,
+            nameEN: movie.nameEN,
+        })
+    }).then((res) => handleResponse(res));
+}

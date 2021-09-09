@@ -21,7 +21,7 @@ function Register({ onRegister, clearErrors, registerError }) {
             <form className="register__form" onSubmit={handleRegister}>
                 <fieldset className="register__fieldset">
                     <p className="register__text">Имя</p>
-                    <input className="register__input" type="text" name="name" value={values.name || ""} onChange={handleChange} required minLength="2" />
+                    <input className="register__input" type="text" name="name" value={values.name || ""} onChange={handleChange} pattern="[а-яА-Яa-zA-ZёË\- ]{1,}" required minLength="2" />
                     <span className="register__error">{errors.name}</span>
                     <p className="register__text">E-mail</p>
                     <input className="register__input" type="email" name="email" value={values.email || ""} onChange={handleChange} required />

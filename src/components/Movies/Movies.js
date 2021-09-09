@@ -6,7 +6,10 @@ import Footer from "../Footer/Footer";
 import "./Movies.css";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
-function Movies({ isLogged, setFilter, isFilterMovies, moviesCollection, searchSavedMovies, searchMovies, isLoadingMovies, savedMovies, movieDeleteFromSavedMovies, movieSaveInStore }) {
+function Movies({ isLogged, setFilter, isFilterMovies, moviesCollection, searchSavedMovies, searchMovies, isLoadingMovies, savedMovies, movieDeleteFromSavedMovies, movieSaveInStore, foundError, serverError, clearAllErrors }) {
+    React.useEffect(() => {
+        clearAllErrors();
+    }, []);
     function changeFilter() {
         setFilter();
     }
@@ -59,7 +62,7 @@ function Movies({ isLogged, setFilter, isFilterMovies, moviesCollection, searchS
             <Header isLogged={isLogged} isMain={false} isMovies={true} isSavedMovies={false} isProfile={false} />
             <SearchForm isSaved={false} searchMovies={searchMovies} searchSavedMovies={searchSavedMovies} />
             <FilterCheckbox isFilterMovies={isFilterMovies} changeFilter={changeFilter} />
-            <MoviesCardList moviesCollection={moviesCollectionVisible} isSaved={false} isLoadingMovies={isLoadingMovies} savedMovies={savedMovies} movieDeleteFromSavedMovies={movieDeleteFromSavedMovies} movieSaveInStore={movieSaveInStore} />
+            <MoviesCardList moviesCollection={moviesCollectionVisible} isSaved={false} isLoadingMovies={isLoadingMovies} savedMovies={savedMovies} movieDeleteFromSavedMovies={movieDeleteFromSavedMovies} movieSaveInStore={movieSaveInStore} foundError={foundError} serverError={serverError} />
             <button type="button" onClick={addMoviesInCollectionVisible} className={moviesCollectionVisible.length === moviesCollection.length ? "movies__button_hide" : "movies__button"}>Ещё</button>
             <Footer />
         </section>
