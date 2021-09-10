@@ -14,7 +14,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-## Уточнения
+- [Ссылка на проект на https](https://backend-diplom-yandex-practicum.site/)
+- [Ссылка на проект на http](http://backend-diplom-yandex-practicum.site/)
+- [Ссылка на проект по IP адресу](https://84.201.164.235/)
 
-Компонент Preloader создан - он вставлен в компонент MoviesCardList - для того чтобы его увидеть - нужно поменять значение State.
-Для того чтобы увидеть шапку залогиненного пользователя - нужно изменить state в компоненте App.
+### Обзор
+
+- Домен: backend-diplom-yandex-practicum.site
+- Запросы к бэкенду: backend-diplom-yandex-practicum.site/api

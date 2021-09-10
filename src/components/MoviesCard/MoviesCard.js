@@ -21,7 +21,8 @@ function MoviesCard({ movies, isSaved, savedMovies, movieDeleteFromSavedMovies, 
     }
     function handleLikeCard(e) {
         if (isLike) {
-            movieDeleteFromSavedMovies(e.target.closest(".movies-card").id);
+            const searchMovie = savedMovies.find((item) => item.movieId === String(movies.id));
+            movieDeleteFromSavedMovies(searchMovie._id);
         }
         else {
             movieSaveInStore(movie);
@@ -29,7 +30,7 @@ function MoviesCard({ movies, isSaved, savedMovies, movieDeleteFromSavedMovies, 
         setIsLike(!isLike);
     }
     function deleteCard(e) {
-        movieDeleteFromSavedMovies(e.target.closest(".movies-card").id);
+        movieDeleteFromSavedMovies(movies._id);
     }
     React.useEffect(() => {
         if (nowMovieSaved) {

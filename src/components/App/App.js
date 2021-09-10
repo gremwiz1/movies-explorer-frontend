@@ -41,10 +41,12 @@ function App() {
         if (jwt) {
             setToken(jwt);
             if (movies) {
-                setMoviesCollection(movies);
+                const result = JSON.parse(movies);
+                setMoviesCollection(result);
             }
             if (savedMovies) {
-                setSavedMoviesCollection(savedMovies);
+                const resultSave = JSON.parse(savedMovies);
+                setSavedMoviesCollection(resultSave);
             }
             MoviesApi.getContent(jwt)
                 .then((user) => {
@@ -79,6 +81,12 @@ function App() {
                     localStorage.setItem('jwt', data.token);
                     setIsLogged(true);
                     history.push('/movies');
+                    MoviesApi.getSavedMovies(token)
+                        .then((movies) => {
+                            setSavedMoviesCollection(movies);
+                            localStorage.setItem('savedMovies', JSON.stringify(movies));
+                        })
+                        .catch((err) => console.log(err));
                 }
             }).catch((err) => {
 
@@ -197,7 +205,7 @@ function App() {
                 setFilterTimeMoviesCollection(result);
             }
             else if (pathname === "/saved-movies") {
-                const result = searchFilterTime(filterSavedMoviesCollection);
+                const result = searchFilterTime(savedMoviesCollection);
                 if (result.length > 0) {
                     setFoundError(false);
                 }
@@ -248,7 +256,7 @@ function App() {
             }).catch((err) => setProfileError("Произошла ошибка при обновлении профиля"));
     }
     React.useEffect(() => {
-        setProfileError("");
+        clearAllErrors();
     }, [pathname]);
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -257,13 +265,44 @@ function App() {
                     <Main isLogged={isLogged} />
                 </Route>
                 <ProtectedRoute exact path="/movies" isLogged={isLogged}>
-                    <Movies isLogged={isLogged} isFilterMovies={isFilterMovies} setFilter={changeFilter} moviesCollection={isFilterMovies ? filterTimeMoviesCollection : filterMoviesCollection} searchMovies={searchMovies} searchSavedMovies={searchSavedMovies} isLoadingMovies={isLoadingMovies} savedMovies={savedMoviesCollection} movieDeleteFromSavedMovies={movieDeleteFromSavedMovies} movieSaveInStore={movieSaveInStore} foundError={foundError} serverError={serverError} clearAllErrors={clearAllErrors} />
+                    <Movies
+                        isLogged={isLogged}
+                        isFilterMovies={isFilterMovies}
+                        setFilter={changeFilter}
+                        moviesCollection={isFilterMovies ? filterTimeMoviesCollection : filterMoviesCollection}
+                        searchMovies={searchMovies}
+                        searchSavedMovies={searchSavedMovies}
+                        isLoadingMovies={isLoadingMovies}
+                        savedMovies={savedMoviesCollection}
+                        movieDeleteFromSavedMovies={movieDeleteFromSavedMovies}
+                        movieSaveInStore={movieSaveInStore}
+                        foundError={foundError}
+                        serverError={serverError}
+                        clearAllErrors={clearAllErrors} />
                 </ProtectedRoute>
                 <ProtectedRoute exact path="/saved-movies" isLogged={isLogged}>
-                    <SavedMovies isLogged={isLogged} isFilterMovies={isFilterMovies} setFilter={changeFilter} moviesCollection={isFilterMovies ? filterTimeSavedMoviesCollection : filterSavedMoviesCollection} searchMovies={searchMovies} searchSavedMovies={searchSavedMovies} isLoadingMovies={isLoadingMovies} savedMovies={savedMoviesCollection} movieDeleteFromSavedMovies={movieDeleteFromSavedMovies} movieSaveInStore={movieSaveInStore} foundError={foundError} serverError={serverError} clearAllErrors={clearAllErrors} />
+                    <SavedMovies
+                        isLogged={isLogged}
+                        isFilterMovies={isFilterMovies}
+                        setFilter={changeFilter}
+                        moviesCollection={isFilterMovies ? filterTimeSavedMoviesCollection : savedMoviesCollection}
+                        searchMovies={searchMovies}
+                        searchSavedMovies={searchSavedMovies}
+                        isLoadingMovies={isLoadingMovies}
+                        savedMovies={savedMoviesCollection}
+                        movieDeleteFromSavedMovies={movieDeleteFromSavedMovies}
+                        movieSaveInStore={movieSaveInStore}
+                        foundError={foundError}
+                        serverError={serverError}
+                        clearAllErrors={clearAllErrors} />
                 </ProtectedRoute>
                 <ProtectedRoute exact path="/profile" isLogged={isLogged}>
-                    <Profile isLogged={isLogged} onSignOut={onSignOut} changeProfile={changeProfile} profileError={profileError} setProfileError={setProfileError} />
+                    <Profile
+                        isLogged={isLogged}
+                        onSignOut={onSignOut}
+                        changeProfile={changeProfile}
+                        profileError={profileError}
+                        setProfileError={setProfileError} />
                 </ProtectedRoute>
                 <Route exact path="/signin">
                     {isLogged ? <Redirect to="/" /> : <Login onLogin={onLogin} clearErrors={clearAllErrors} loginError={loginError} setLoginError={setLoginError} />}

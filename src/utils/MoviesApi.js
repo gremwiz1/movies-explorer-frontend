@@ -46,8 +46,8 @@ export const getSavedMovies = (token) => {
         }
     }).then((res) => handleResponse(res));
 }
-export const deleteSavedMovie = ({ token, movieId }) => {
-    return fetch(`${BASE_URL}/movies/${movieId}`, {
+export const deleteSavedMovie = ({ token, id }) => {
+    return fetch(`${BASE_URL}/movies/${id}`, {
         method: 'DELETE',
         headers: {
             "Content-Type": "application/json",
@@ -71,7 +71,7 @@ export const saveMovie = ({ token, movie }) => {
             image: movie.image,
             trailer: movie.trailer,
             thumbnail: movie.thumbnail,
-            movieId: movie.Id,
+            movieId: String(movie.movieId),
             nameRU: movie.nameRU,
             nameEN: movie.nameEN,
         })
