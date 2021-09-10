@@ -4,9 +4,9 @@ import { useFormWithValidation } from "../../hooks/useFormWIthValidation";
 import Header from "../Header/Header";
 import "./Profile.css";
 
-function Profile({ isLogged, onSignOut, changeProfile, profileError }) {
+function Profile({ isLogged, onSignOut, changeProfile, profileError, setProfileError }) {
     const currentUser = React.useContext(CurrentUserContext);
-    const { values, handleChange, errors, isFormValid, resetForm, setValues } = useFormWithValidation();
+    const { values, handleChange, errors, isValid, resetForm, setValues } = useFormWithValidation();
     function editUserProfile(e) {
         e.preventDefault();
         changeProfile({ email: values.email, name: values.name });
@@ -15,6 +15,12 @@ function Profile({ isLogged, onSignOut, changeProfile, profileError }) {
     function handleClickSignOut() {
         resetForm();
         onSignOut();
+    }
+    function handleChangeInput(e) {
+        handleChange(e);
+        if (profileError.length > 0) {
+            setProfileError("");
+        }
     }
     React.useEffect(() => {
         setValues(currentUser);
@@ -28,18 +34,18 @@ function Profile({ isLogged, onSignOut, changeProfile, profileError }) {
                 <div className="profile__fields">
                     <div className="profile__field">
                         <p className="profile__text">Имя</p>
-                        <input className="profile__input" name="name" value={values.name || ""} pattern="[а-яА-Яa-zA-ZёË\- ]{1,}" type="text" onChange={handleChange} minLength="2" required />
+                        <input className="profile__input" name="name" value={values.name || ""} pattern="[а-яА-Яa-zA-ZёË\- ]{1,}" type="text" onChange={handleChangeInput} minLength="2" required />
                     </div>
                     <span className="profile__error">{errors.name}</span>
                     <div className="profile__field">
                         <p className="profile__text">E-mail</p>
-                        <input className="profile__input" name="email" value={values.email || ""} onChange={handleChange} type="email" required />
+                        <input className="profile__input" name="email" value={values.email || ""} onChange={handleChangeInput} type="email" required />
                     </div>
                     <span className="profile__error">{errors.email}</span>
                 </div>
                 <div className="profile__buttons">
                     <span className="profile__error">{profileError}</span>
-                    <button className={isFormValid ? "profile__button-submit" : "profile__button-submit profile__button_invalid"} disabled={!isFormValid} type="submit">Редактировать</button>
+                    <button className={isValid ? "profile__button-submit" : "profile__button-submit profile__button_invalid"} disabled={!isValid} type="submit">Редактировать</button>
                     <button className="profile__button-logout" type="button" onClick={handleClickSignOut}>Выйти из аккаунта</button>
                 </div>
 

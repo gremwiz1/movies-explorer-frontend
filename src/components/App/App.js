@@ -256,13 +256,13 @@ function App() {
                     <SavedMovies isLogged={isLogged} isFilterMovies={isFilterMovies} setFilter={changeFilter} moviesCollection={isFilterMovies ? filterTimeSavedMoviesCollection : filterSavedMoviesCollection} searchMovies={searchMovies} searchSavedMovies={searchSavedMovies} isLoadingMovies={isLoadingMovies} savedMovies={savedMoviesCollection} movieDeleteFromSavedMovies={movieDeleteFromSavedMovies} movieSaveInStore={movieSaveInStore} foundError={foundError} serverError={serverError} clearAllErrors={clearAllErrors} />
                 </ProtectedRoute>
                 <ProtectedRoute exact path="/profile" isLogged={isLogged}>
-                    <Profile isLogged={isLogged} onSignOut={onSignOut} changeProfile={changeProfile} profileError={profileError} />
+                    <Profile isLogged={isLogged} onSignOut={onSignOut} changeProfile={changeProfile} profileError={profileError} setProfileError={setProfileError} />
                 </ProtectedRoute>
                 <Route exact path="/signin">
-                    {isLogged ? <Redirect to="/" /> : <Login onLogin={onLogin} clearErrors={clearAllErrors} loginError={loginError} />}
+                    {isLogged ? <Redirect to="/" /> : <Login onLogin={onLogin} clearErrors={clearAllErrors} loginError={loginError} setLoginError={setLoginError} />}
                 </Route>
                 <Route exact path="/signup">
-                    {isLogged ? <Redirect to="/" /> : <Register onRegister={onRegister} clearErrors={clearAllErrors} registerError={registerError} />}
+                    {isLogged ? <Redirect to="/" /> : <Register onRegister={onRegister} clearErrors={clearAllErrors} registerError={registerError} setRegisterError={setRegisterError} />}
                 </Route>
                 <Route path="*" >
                     <NotFound />
