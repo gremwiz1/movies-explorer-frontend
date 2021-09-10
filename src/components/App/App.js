@@ -207,7 +207,7 @@ function App() {
                 setFilterTimeMoviesCollection(result);
             }
             else if (pathname === "/saved-movies") {
-                const result = searchFilterTime(savedMoviesCollection);
+                const result = searchFilterTime(filterSavedMoviesCollection);
                 if (result.length > 0) {
                     setFoundError(false);
                 }
