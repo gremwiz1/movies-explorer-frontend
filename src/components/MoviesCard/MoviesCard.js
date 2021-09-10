@@ -6,12 +6,25 @@ function MoviesCard({ movies, isSaved, savedMovies, movieDeleteFromSavedMovies, 
 
     const [isLike, setIsLike] = React.useState(false);
     const nowMovieSaved = savedMovies.find((item) => item.nameRU === movies.nameRU);
+    const movie = {
+        country: movies.country || 'нет',
+        director: movies.director || 'Нет',
+        duration: movies.duration || 0,
+        year: movies.year || 'Нет',
+        description: movies.description || 'Нет',
+        image: isSaved ? movies.image : `https://api.nomoreparties.co${movies.image.url}`,
+        trailer: isSaved ? movies.trailer : movies.trailerLink,
+        thumbnail: isSaved ? movies.thumbnail : `https://api.nomoreparties.co${movies.image.formats.thumbnail.url}`,
+        movieId: isSaved ? movies._id : movies.id,
+        nameRU: movies.nameRU || 'Нет',
+        nameEN: movies.nameEN || 'Нет',
+    }
     function handleLikeCard(e) {
         if (isLike) {
             movieDeleteFromSavedMovies(e.target.closest(".movies-card").id);
         }
         else {
-            movieSaveInStore(movies);
+            movieSaveInStore(movie);
         }
         setIsLike(!isLike);
     }

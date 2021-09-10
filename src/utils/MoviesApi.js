@@ -1,4 +1,4 @@
-const BASE_URL = " https://backend-diplom-yandex-practicum.site";
+const BASE_URL = " https://backend-diplom-yandex-practicum.site/api";
 const handleResponse = (response) => {
     if (response.ok) return response.json();
     else return Promise.reject(response.status);
@@ -71,7 +71,7 @@ export const saveMovie = ({ token, movie }) => {
             image: movie.image,
             trailer: movie.trailer,
             thumbnail: movie.thumbnail,
-            movieId: movie.id,
+            movieId: movie.Id,
             nameRU: movie.nameRU,
             nameEN: movie.nameEN,
         })

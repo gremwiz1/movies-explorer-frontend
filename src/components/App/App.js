@@ -87,6 +87,13 @@ function App() {
                 setLoginError('Попробуйте еще раз!');
                 console.log(err);
             })
+        if (isLogged) {
+            MoviesApi.getContent()
+                .then((user) => {
+                    setCurrentUser(user);
+                })
+                .catch((err) => setProfileError("Не удалось загрузить данные"))
+        }
     }
     function onSignOut() {
         localStorage.removeItem('jwt');
