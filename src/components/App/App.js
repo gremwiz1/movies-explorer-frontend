@@ -13,7 +13,7 @@ import * as MainApi from "../../utils/MainApi";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function App() {
-    const [isLogged, setIsLogged] = React.useState(true);
+    const [isLogged, setIsLogged] = React.useState(false);
     const [isFilterMovies, setIsFilterMovies] = React.useState(false);
     const [moviesCollection, setMoviesCollection] = React.useState([]);
     const [savedMoviesCollection, setSavedMoviesCollection] = React.useState([]);
