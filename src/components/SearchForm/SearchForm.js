@@ -16,6 +16,7 @@ function SearchForm({ isSaved, searchMovies, searchSavedMovies }) {
     function handleSearchSavedMovies(e) {
         e.preventDefault();
         searchSavedMovies(textInput);
+        setTextInput("");
     }
     return (
         <>

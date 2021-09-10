@@ -47,6 +47,7 @@ function App() {
             if (savedMovies) {
                 const resultSave = JSON.parse(savedMovies);
                 setSavedMoviesCollection(resultSave);
+                setFilterSavedMoviesCollection(resultSave);
             }
             MoviesApi.getContent(jwt)
                 .then((user) => {
@@ -84,6 +85,7 @@ function App() {
                     MoviesApi.getSavedMovies(token)
                         .then((movies) => {
                             setSavedMoviesCollection(movies);
+                            setFilterSavedMoviesCollection(movies);
                             localStorage.setItem('savedMovies', JSON.stringify(movies));
                         })
                         .catch((err) => console.log(err));
@@ -257,6 +259,7 @@ function App() {
     }
     React.useEffect(() => {
         clearAllErrors();
+        setFilterSavedMoviesCollection(savedMoviesCollection);
     }, [pathname]);
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -285,7 +288,7 @@ function App() {
                         isLogged={isLogged}
                         isFilterMovies={isFilterMovies}
                         setFilter={changeFilter}
-                        moviesCollection={isFilterMovies ? filterTimeSavedMoviesCollection : savedMoviesCollection}
+                        moviesCollection={isFilterMovies ? filterTimeSavedMoviesCollection : filterSavedMoviesCollection}
                         searchMovies={searchMovies}
                         searchSavedMovies={searchSavedMovies}
                         isLoadingMovies={isLoadingMovies}
