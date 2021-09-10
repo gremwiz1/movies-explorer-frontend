@@ -1,11 +1,9 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import "./MoviesCardList.css";
 import Preloader from "../Preloader/Preloader";
 
 function MoviesCardList({ moviesCollection, isSaved, isLoadingMovies, savedMovies, movieDeleteFromSavedMovies, movieSaveInStore, foundError, serverError }) {
-    const { pathname } = useLocation();
     return (
         <section className="movies-card-list">
             {isLoadingMovies ? <Preloader /> : ""}
