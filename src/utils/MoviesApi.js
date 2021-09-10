@@ -1,4 +1,4 @@
-const BASE_URL = " api.diplom.backend.nomoredomains.monster";
+const BASE_URL = " https://api.diplom.backend.nomoredomains.monster";
 const handleResponse = (response) => {
     if (response.ok) return response.json();
     else return Promise.reject(response.status);
