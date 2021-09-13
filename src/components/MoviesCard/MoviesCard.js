@@ -40,6 +40,7 @@ function MoviesCard({ movies, isSaved, savedMovies, movieDeleteFromSavedMovies, 
     }, [nowMovieSaved])
     const durationMovie = `${Math.trunc(movies.duration / 60)}ч ${movies.duration % 60}м`;
     return (
+
         <li className="movies-card" id={isSaved ? movies._id : movies.id}>
             <a href={isSaved ? movies.trailer : movies.trailerLink} className="movies-card__trailer" target="_blank" rel="noreferrer"><img className="movies-card__image" alt={movies.nameRU} src={isSaved ? movies.image : `https://api.nomoreparties.co${movies.image.url}`} /></a>
             <div className="movies-card__content">
@@ -58,6 +59,7 @@ function MoviesCard({ movies, isSaved, savedMovies, movieDeleteFromSavedMovies, 
             </div>
             <p className="movies-card__time">{durationMovie}</p>
         </li>
+
     )
 };
 export default MoviesCard;

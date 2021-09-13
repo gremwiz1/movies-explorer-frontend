@@ -147,8 +147,6 @@ function App() {
             setFilterMoviesCollection(result);
         }
         else {
-
-
             MainApi.getInitialMovies()
                 .then((res) => {
                     setMoviesCollection(res);
@@ -161,6 +159,16 @@ function App() {
                         setFoundError(true);
                     }
                     setFilterMoviesCollection(result);
+                    if (isFilterMovies) {
+                        const resultTimeFilter = searchFilterTime(result);
+                        if (resultTimeFilter.length > 0) {
+                            setFoundError(false);
+                        }
+                        else {
+                            setFoundError(true);
+                        }
+                        setFilterTimeMoviesCollection(resultTimeFilter);
+                    }
                 })
                 .catch((err) => setServerError(true));
         }
@@ -210,17 +218,19 @@ function App() {
     React.useEffect(() => {
         setFoundError(false);
         if (isFilterMovies) {
-            if (pathname === "/movies") {
-                const result = searchFilterTime(filterMoviesCollection);
-                if (result.length > 0) {
-                    setFoundError(false);
+            if (pathname.pathname === "/movies") {
+                if (moviesCollection.length > 0) {
+                    const result = searchFilterTime(filterMoviesCollection);
+                    if (result.length > 0) {
+                        setFoundError(false);
+                    }
+                    else {
+                        setFoundError(true);
+                    }
+                    setFilterTimeMoviesCollection(result);
                 }
-                else {
-                    setFoundError(true);
-                }
-                setFilterTimeMoviesCollection(result);
             }
-            else if (pathname === "/saved-movies") {
+            else if (pathname.pathname === "/saved-movies") {
                 const result = searchFilterTime(filterSavedMoviesCollection);
                 if (result.length > 0) {
                     setFoundError(false);
@@ -240,8 +250,8 @@ function App() {
                 const result = filterMoviesById(savedMoviesCollection, id);
                 setSavedMoviesCollection(result);
                 localStorage.setItem('savedMovies', JSON.stringify(result));
-                setFilterSavedMoviesCollection(filterSavedMoviesCollection, id);
-                setFilterTimeSavedMoviesCollection(filterTimeMoviesCollection, id);
+                setFilterSavedMoviesCollection(filterMoviesById(filterSavedMoviesCollection, id));
+                setFilterTimeSavedMoviesCollection(filterMoviesById(filterTimeMoviesCollection, id));
             })
             .catch((err) => setServerError(true));
         setTimeout(() => {
@@ -256,6 +266,13 @@ function App() {
                 const movies = [...savedMoviesCollection, res];
                 localStorage.setItem('savedMovies', JSON.stringify(movies));
                 setSavedMoviesCollection(prev => [...prev, res]);
+                if (isFilterMovies) {
+                    setFilterTimeSavedMoviesCollection(prev => [...prev, res]);
+                    setFilterSavedMoviesCollection(prev => [...prev, res]);
+                }
+                else {
+                    setFilterSavedMoviesCollection(prev => [...prev, res]);
+                }
             }).catch((err) => setServerError(true));
         setTimeout(() => {
             setIsLoadingMovies(false);
@@ -279,7 +296,9 @@ function App() {
     }
     React.useEffect(() => {
         clearAllErrors();
-        setFilterSavedMoviesCollection(savedMoviesCollection);
+        if (pathname === "/saved-movies") {
+            setFilterSavedMoviesCollection(savedMoviesCollection);
+        }
     }, [pathname]);
     return (
         <CurrentUserContext.Provider value={currentUser}>
