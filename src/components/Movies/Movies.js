@@ -6,6 +6,7 @@ import Footer from "../Footer/Footer";
 import "./Movies.css";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
+
 function Movies({ isLogged, setFilter, isFilterMovies, moviesCollection, searchSavedMovies, searchMovies, isLoadingMovies, savedMovies, movieDeleteFromSavedMovies, movieSaveInStore, foundError, serverError, clearAllErrors }) {
     React.useEffect(() => {
         clearAllErrors();

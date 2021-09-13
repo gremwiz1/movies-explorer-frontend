@@ -30,7 +30,7 @@ function App() {
     const [isLoadingMovies, setIsLoadingMovies] = React.useState(false);
     const [token, setToken] = React.useState("");
     const history = useHistory();
-    const { pathname } = useLocation();
+    const pathname = useLocation();
     function changeFilter() {
         setIsFilterMovies(!isFilterMovies);
     }
@@ -53,7 +53,7 @@ function App() {
                 .then((user) => {
                     setCurrentUser(user);
                     setIsLogged(true);
-                    history.push('/');
+                    history.push(pathname.pathname);
                 })
                 .catch((err) => {
                     setServerError(true);
@@ -66,7 +66,7 @@ function App() {
     function onRegister({ email, password, name }) {
         MoviesApi.register({ email, password, name })
             .then((data) => {
-                if (data.user) {
+                if (data._id) {
                     onLogin({ email, password })
                 }
             }).catch((err) => {
@@ -82,13 +82,20 @@ function App() {
                     localStorage.setItem('jwt', data.token);
                     setIsLogged(true);
                     history.push('/movies');
-                    MoviesApi.getSavedMovies(token)
+                    MoviesApi.getSavedMovies(data.token)
                         .then((movies) => {
                             setSavedMoviesCollection(movies);
                             setFilterSavedMoviesCollection(movies);
                             localStorage.setItem('savedMovies', JSON.stringify(movies));
                         })
                         .catch((err) => console.log(err));
+                    MoviesApi.getContent(data.token)
+                        .then((user) => {
+                            setCurrentUser(user);
+                        })
+                        .catch((err) => {
+                            setServerError(true);
+                        })
                 }
             }).catch((err) => {
 
@@ -117,7 +124,7 @@ function App() {
         setFilterTimeMoviesCollection([]);
         setFilterMoviesCollection([]);
         clearAllErrors();
-        history.push('/signin');
+        history.push('/');
     }
     function clearAllErrors() {
         setLoginError("");
@@ -128,6 +135,7 @@ function App() {
     }
     function searchMovies(searchText) {
         setServerError(false);
+        setIsLoadingMovies(true);
         if (moviesCollection.length > 0) {
             const result = search(moviesCollection, searchText);
             if (result.length > 0) {
@@ -139,7 +147,8 @@ function App() {
             setFilterMoviesCollection(result);
         }
         else {
-            setIsLoadingMovies(true);
+
+
             MainApi.getInitialMovies()
                 .then((res) => {
                     setMoviesCollection(res);
@@ -154,9 +163,11 @@ function App() {
                     setFilterMoviesCollection(result);
                 })
                 .catch((err) => setServerError(true));
-
-            setIsLoadingMovies(false);
         }
+        setTimeout(() => {
+            setIsLoadingMovies(false);
+        }, 1000);
+
     }
     function searchSavedMovies(searchText) {
         setServerError(false);
@@ -172,7 +183,10 @@ function App() {
                     setFilterSavedMoviesCollection(search(savedMoviesCollection, searchText));
                 })
                 .catch((err) => setServerError(true));
-            setIsLoadingMovies(false);
+            setTimeout(() => {
+                setIsLoadingMovies(false);
+            }, 1000);
+
         }
     }
     function search(collection, searchText) {
@@ -230,7 +244,10 @@ function App() {
                 setFilterTimeSavedMoviesCollection(filterTimeMoviesCollection, id);
             })
             .catch((err) => setServerError(true));
-        setIsLoadingMovies(false);
+        setTimeout(() => {
+            setIsLoadingMovies(false);
+        }, 1000);
+
     }
     function movieSaveInStore(movie) {
         setIsLoadingMovies(true);
@@ -240,7 +257,10 @@ function App() {
                 localStorage.setItem('savedMovies', JSON.stringify(movies));
                 setSavedMoviesCollection(prev => [...prev, res]);
             }).catch((err) => setServerError(true));
-        setIsLoadingMovies(false);
+        setTimeout(() => {
+            setIsLoadingMovies(false);
+        }, 1000);
+
     }
     function filterMoviesById(collection, id) {
         return collection.filter((item) => { return item._id !== id });
@@ -282,6 +302,7 @@ function App() {
                         foundError={foundError}
                         serverError={serverError}
                         clearAllErrors={clearAllErrors} />
+
                 </ProtectedRoute>
                 <ProtectedRoute exact path="/saved-movies" isLogged={isLogged}>
                     <SavedMovies
@@ -313,7 +334,7 @@ function App() {
                 <Route exact path="/signup">
                     {isLogged ? <Redirect to="/" /> : <Register onRegister={onRegister} clearErrors={clearAllErrors} registerError={registerError} setRegisterError={setRegisterError} />}
                 </Route>
-                <Route path="*" >
+                <Route path="*">
                     <NotFound />
                 </Route>
             </Switch>

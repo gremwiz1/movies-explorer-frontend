@@ -6,13 +6,16 @@ import Footer from "../Footer/Footer";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import "./SavedMovies.css";
 
+
 function SavedMovies({ isLogged, setFilter, isFilterMovies, moviesCollection, searchMovies, searchSavedMovies, isLoadingMovies, savedMovies, movieDeleteFromSavedMovies, movieSaveInStore, foundError, serverError, clearAllErrors }) {
+
     React.useEffect(() => {
         clearAllErrors();
     }, []);
     function changeFilter() {
         setFilter();
     }
+
 
     return (
         <section className="saved-movies">

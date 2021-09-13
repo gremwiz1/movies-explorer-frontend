@@ -5,7 +5,8 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 function MoviesCard({ movies, isSaved, savedMovies, movieDeleteFromSavedMovies, movieSaveInStore }) {
 
     const [isLike, setIsLike] = React.useState(false);
-    const nowMovieSaved = savedMovies.find((item) => item.nameRU === movies.nameRU);
+    const currentUser = React.useContext(CurrentUserContext);
+    const nowMovieSaved = savedMovies.find((item) => item.nameRU === movies.nameRU && item.owner === currentUser._id);
     const movie = {
         country: movies.country || 'нет',
         director: movies.director || 'Нет',
@@ -37,7 +38,6 @@ function MoviesCard({ movies, isSaved, savedMovies, movieDeleteFromSavedMovies, 
             setIsLike(true);
         }
     }, [nowMovieSaved])
-    const currentUser = React.useContext(CurrentUserContext);
     const durationMovie = `${Math.trunc(movies.duration / 60)}ч ${movies.duration % 60}м`;
     return (
         <li className="movies-card" id={isSaved ? movies._id : movies.id}>

@@ -6,7 +6,7 @@ import Preloader from "../Preloader/Preloader";
 function MoviesCardList({ moviesCollection, isSaved, isLoadingMovies, savedMovies, movieDeleteFromSavedMovies, movieSaveInStore, foundError, serverError }) {
     return (
         <section className="movies-card-list">
-            {isLoadingMovies ? <Preloader /> : ""}
+            <Preloader isLoadingMovies={isLoadingMovies} />
             <span className="search-form__error">{foundError ? "Ничего не найдено" : ""}</span>
             <span className="server__error">{serverError ? "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз" : ""}</span>
             <ul className="movies__collection">
