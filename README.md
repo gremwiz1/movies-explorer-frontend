@@ -1,24 +1,26 @@
-# Getting Started with Create React App
+# Дипломный проект
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## О чём этот проект:
 
-## Available Scripts
+Дипломный проект - это финальный проект в процессе обучения в Яндекс Практикум. Представляет собой интерактивную страницу с поиском по базе фильмов, где можно добавлять/удалять фильмы в избранное, редактировать информацию о пользователе. Вся информация сохраняется на сервере. Также реализована регистрация и авторизация пользователя.
 
-In the project directory, you can run:
+### Что было сделано:
 
-### `npm start`
+Фронтенд:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- HTML5, CSS, JS
+- React (Хуки, функциональные компоненты, роутинг)
+- БЭМ
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Бэкенд:
+
+- Node
+- Express
+- База данных - MongoDB
 
 - [Ссылка на проект на https](https://backend-diplom-yandex-practicum.site/)
 - [Ссылка на проект на http](http://backend-diplom-yandex-practicum.site/)
 - [Ссылка на проект по IP адресу](https://84.201.164.235/)
-
-### Обзор
 
 - Домен: backend-diplom-yandex-practicum.site
 - Запросы к бэкенду: backend-diplom-yandex-practicum.site/api
