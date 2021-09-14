@@ -5,6 +5,12 @@
   height: 230px;
   list-style-type: none;
 }
+.movies-card__trailer {
+  text-decoration: none;
+}
+.movies-card__trailer:hover {
+  opacity: 0.8;
+}
 .movies-card__image {
   object-fit: contain;
   width: 100%;

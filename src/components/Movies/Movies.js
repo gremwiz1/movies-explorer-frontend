@@ -6,103 +6,65 @@ import Footer from "../Footer/Footer";
 import "./Movies.css";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
-function Movies({ isLogged, setFilter, isFilterMovies }) {
+
+function Movies({ isLogged, setFilter, isFilterMovies, moviesCollection, searchSavedMovies, searchMovies, isLoadingMovies, savedMovies, movieDeleteFromSavedMovies, movieSaveInStore, foundError, serverError, clearAllErrors }) {
+    React.useEffect(() => {
+        clearAllErrors();
+    }, []);
     function changeFilter() {
         setFilter();
     }
-    const moviesCollection = [
-        {
-            movieId: 0,
-            duration: "1ч42м",
-            image: "/images/film1.png",
-            nameRU: "33 слова о дизайне",
-            isLikeCard: false
-        },
-        {
-            movieId: 1,
-            duration: "1ч42м",
-            image: "/images/film2.png",
-            nameRU: "Киноальманах «100 лет дизайна»",
-            isLikeCard: true
-        },
-        {
-            movieId: 2,
-            duration: "1ч42м",
-            image: "/images/film3.png",
-            nameRU: "В погоне за Бенкси",
-            isLikeCard: true
-        },
-        {
-            movieId: 3,
-            duration: "1ч42м",
-            image: "/images/film4.png",
-            nameRU: "Баския: Взрыв реальности",
-            isLikeCard: true
-        },
-        {
-            movieId: 4,
-            duration: "1ч42м",
-            image: "/images/film1.png",
-            nameRU: "33 слова о дизайне",
-            isLikeCard: true
-        },
-        {
-            movieId: 5,
-            duration: "1ч42м",
-            image: "/images/film2.png",
-            nameRU: "Киноальманах «100 лет дизайна»",
-            isLikeCard: true
-        },
-        {
-            movieId: 6,
-            duration: "1ч42м",
-            image: "/images/film3.png",
-            nameRU: "В погоне за Бенкси",
-            isLikeCard: true
-        },
-        {
-            movieId: 7,
-            duration: "1ч42м",
-            image: "/images/film4.png",
-            nameRU: "Баския: Взрыв реальности",
-            isLikeCard: true
-        },
-        {
-            movieId: 8,
-            duration: "1ч42м",
-            image: "/images/film1.png",
-            nameRU: "33 слова о дизайне",
-            isLikeCard: true
-        },
-        {
-            movieId: 9,
-            duration: "1ч42м",
-            image: "/images/film2.png",
-            nameRU: "Киноальманах «100 лет дизайна»",
-            isLikeCard: true
-        },
-        {
-            movieId: 10,
-            duration: "1ч42м",
-            image: "/images/film3.png",
-            nameRU: "В погоне за Бенкси",
-            isLikeCard: true
-        },
-        {
-            movieId: 11,
-            duration: "1ч42м",
-            image: "/images/film4.png",
-            nameRU: "Баския: Взрыв реальности",
-            isLikeCard: true
-        },
-    ]
+    const [numberMoviesInDisplay, setNumberMoviesInDisplay] = React.useState(() => {
+        const windowWidth = window.innerWidth;
+        if (windowWidth > 1279) {
+            return 16
+        } else if (windowWidth >= 990) {
+            return 12
+        } else if (windowWidth >= 500) {
+            return 8
+        } else return 5
+    })
+    const [numberMoviesAdd, setNumberMoviesAdd] = React.useState(() => {
+        const windowWidth = window.innerWidth;
+        if (windowWidth > 1279) {
+            return 4
+        } else if (windowWidth >= 990) {
+            return 3
+        } else if (windowWidth >= 500) {
+            return 2
+        } else return 2
+    })
+    function onChangeScreenWidth() {
+        const windowWidth = window.innerWidth;
+        if (windowWidth > 1279) {
+            setNumberMoviesInDisplay(16);
+            setNumberMoviesAdd(4);
+        } else if (windowWidth >= 990) {
+            setNumberMoviesInDisplay(12);
+            setNumberMoviesAdd(3);
+        } else if (windowWidth >= 500) {
+            setNumberMoviesInDisplay(8);
+            setNumberMoviesAdd(2);
+        } else {
+            setNumberMoviesInDisplay(5);
+            setNumberMoviesAdd(2);
+        }
+    }
+    React.useEffect(() => {
+        window.addEventListener('resize', onChangeScreenWidth);
+    }, []);
+
+    const moviesCollectionVisible = moviesCollection.slice(0, numberMoviesInDisplay);
+    function addMoviesInCollectionVisible() {
+        setNumberMoviesInDisplay(prevState => prevState + numberMoviesAdd);
+    }
     return (
         <section className="movies">
             <Header isLogged={isLogged} isMain={false} isMovies={true} isSavedMovies={false} isProfile={false} />
-            <SearchForm />
+            <SearchForm isSaved={false} searchMovies={searchMovies} searchSavedMovies={searchSavedMovies} />
             <FilterCheckbox isFilterMovies={isFilterMovies} changeFilter={changeFilter} />
-            <MoviesCardList moviesCollection={moviesCollection} isSaved={false} />
-            <button type="button" className="movies__button">Ещё</button>
+            <MoviesCardList moviesCollection={moviesCollectionVisible} isSaved={false} isLoadingMovies={isLoadingMovies} savedMovies={savedMovies} movieDeleteFromSavedMovies={movieDeleteFromSavedMovies} movieSaveInStore={movieSaveInStore} foundError={foundError} serverError={serverError} />
+            <button type="button" onClick={addMoviesInCollectionVisible} className={moviesCollectionVisible.length === moviesCollection.length ? "movies__button_hide" : "movies__button"}>Ещё</button>
             <Footer />
         </section>
 

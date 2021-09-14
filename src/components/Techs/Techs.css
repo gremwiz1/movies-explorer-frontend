@@ -69,6 +69,7 @@
   line-height: 17px;
   letter-spacing: -0.04em;
   text-align: center;
+  border-radius: 10px;
 }
 .techs__list_element:last-child {
   margin-right: 0;
