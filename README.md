@@ -18,9 +18,3 @@
 - Express
 - База данных - MongoDB
 
-- [Ссылка на проект на https](https://backend-diplom-yandex-practicum.site/)
-- [Ссылка на проект на http](http://backend-diplom-yandex-practicum.site/)
-- [Ссылка на проект по IP адресу](https://84.201.164.235/)
-
-- Домен: backend-diplom-yandex-practicum.site
-- Запросы к бэкенду: backend-diplom-yandex-practicum.site/api
